@@ -23,23 +23,20 @@ function getArrayParams(arr) {
 // Задание 2
 function worker(arr) {
   let sum = 0;
-  for (let i = 0; i < arr.length; i++)
-      sum += arr[i];
+  for (let number of arr) {
+  sum += number;
+  }
 
   return sum;
 }
 
 function makeWork(arrOfArr, func) {
-  let max;
-  let sum1 = worker2(arrOfArr[0]);
-    let sum2 = worker2(arrOfArr[1]);
-
-    if (sum1 > sum2) {
-     max = sum1;
-    }
-    else {
-     max = sum2;
-    }
+  let max= - Infinity;
+  for (let arr of arrOfArr) {
+  if (func(arr) > max) {
+   max = func(arr)
+     }
+   }
   
   return max;
 }
@@ -47,8 +44,8 @@ function makeWork(arrOfArr, func) {
 // Задание 3
 function worker2(arr) {
   let min, max, different;
-  min = Infinity;
-  max = -Infinity;
+  min = arr[0];
+  max = -arr[0];
   different = 0;
 
   for (let i = 0; i < arr.length; i++) {
@@ -60,7 +57,7 @@ function worker2(arr) {
     }
   }
 
-  different = Math.abs(max - min);
-  return different;
+
+  return Math.abs(max-min);
 
 }
