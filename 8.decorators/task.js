@@ -44,23 +44,20 @@ function cachingDecoratorNew(func) {
 
 
 
-function debounceDecorator2(func, ms) {
-  let timer = null;
+function debounceDecorator2(func,diff) {
+  let timerId;
   let timeStatus = false;
   wrapper.count = 0;
 
     function wrapper(...args) {
-      wrapper.count++;
-      if (!flag) {
-        func.apply(this, args);
+    clearTimeout(timerId);
+      if (!timeStatus) {
+        func(...args);
+        wrapper.count ++;
+        timeStatus = true;
         }
-        flag = true;
-        	clearTimeout(allImmediate);
-            allImmediate = setTimeout(() => {
-              func.apply(this, args);
-        	    flag = false;
-            }, ms);
-          };
-      return wrapper;
+        timerId = setTimeout(() => timeStatus = false, diff);
       }
+      return wrapper;
+  }
 
